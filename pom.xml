@@ -34,7 +34,7 @@
 
     <!-- 依赖包版本 -->
     <lombok.version>1.18.36</lombok.version>
-    <spring-boot.version>3.3.1</spring-boot.version>
+    <spring-boot.version>3.0.2</spring-boot.version>
     <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
     <spring-cloud.version>2022.0.0</spring-cloud.version>
     <jackson.version>2.18.2</jackson.version>
@@ -48,6 +48,8 @@
     <hutool.version>5.8.36</hutool.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>
     <dysmsapi.version>3.1.1</dysmsapi.version>
+    <nacos-config.version>0.3.0-RC</nacos-config.version>
+    <snakeyaml.version>2.4</snakeyaml.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -177,6 +179,13 @@
         <groupId>cn.dev33</groupId>
         <artifactId>sa-token-redis-jackson</artifactId>
         <version>${sa-token.version}</version>
+      </dependency>
+
+      <!-- Nacos 配置中心 -->
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>nacos-config-spring-boot-starter</artifactId>
+        <version>${nacos-config.version}</version>
       </dependency>
 
     </dependencies>

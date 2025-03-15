@@ -1,13 +1,13 @@
-package com.tongji.xiaohashu.auth.constant;
+package com.tongji.xiaohashu.auth.constant
 
 /**
  * @author tongji
  * @time 2025/3/15 11:42
  * @description 角色全局常量
  */
-public class RoleConstants {
+object RoleConstants {
     /**
      * 普通用户的角色
      */
-    public static final Long COMMON_USER_ROLE_ID = 1L;
+    const val COMMON_USER_ROLE_ID: Long = 1L
 }

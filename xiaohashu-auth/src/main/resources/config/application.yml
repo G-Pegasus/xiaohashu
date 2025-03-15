@@ -24,3 +24,20 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: true
+
+alarm:
+  type: sms # 告警类型
+
+#nacos:
+#  config: # Nacos 配置中心
+#    access-key: # 身份验证
+#    secret-key: # 身份验证
+#    data-id: xiaohashu-auth # 指定要加载的配置数据的 Data Id
+#    group: DEFAULT_GROUP # 指定配置数据所属的组
+#    type: yaml # 指定配置数据的格式
+#    server-addr: http://127.0.0.1:8848/ # 指定 Nacos 配置中心的服务器地址
+#    auto-refresh: true # 是否自动刷新配置
+#    remote-first: true # 是否优先使用远程配置
+#    bootstrap:
+#      enable: true # 启动时，预热配置
+
