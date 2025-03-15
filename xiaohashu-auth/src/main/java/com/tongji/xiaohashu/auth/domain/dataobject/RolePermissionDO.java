@@ -1,4 +1,4 @@
-package com.tongji.xiaohashu.auth.controller;
+package com.tongji.xiaohashu.auth.domain.dataobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,16 +7,20 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
- * @author tongji
- * @time 2025/3/13 14:50
- * @description 测试新日期切面
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
-    private String nickname;
+public class RolePermissionDO {
+    private Long id;
+
+    private Long roleId;
+
+    private Long permissionId;
+
     private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
+
+    private Boolean isDeleted;
 }

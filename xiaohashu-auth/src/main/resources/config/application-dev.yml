@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mybatis-example
+    url: jdbc:mysql://localhost:3306/xiaohashu
     username: root
     password: ivfXygfqJWVLg8PKHK87H6MtcnAkxoqRhkTi/Xk1+y/0saY+f4FcB6JFXwy1BR2O7BXHxN73+tu7esUP8NguHw==
     type: com.alibaba.druid.pool.DruidDataSource
@@ -53,8 +53,8 @@ spring:
           max-idle: 10 # 连接池中的最大空闲连接
 
 aliyun: # 接入阿里云（发送短信使用）
-  accessKeyId: LTAI5tEJ8QRwBnGTcWGDqbna
-  accessKeySecret: bgad0ALOt573IFb9DPRjNul4Gbqrgu
+  accessKeyId: LTAI5t9V7MQMRjKbGcGe59Tb
+  accessKeySecret: qK437OpwF5Pa4woEoZSKQUxjNrCoj7
 
 logging:
   level:

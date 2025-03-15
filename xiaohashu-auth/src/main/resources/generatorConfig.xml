@@ -20,7 +20,7 @@
 
         <!-- 数据库链接 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mybatis-example"
+                        connectionURL="jdbc:mysql://localhost:3306/xiaohashu"
                         userId="root"
                         password="liutongji8512">
             <!-- 解决多个重名的表生成表结构不一致问题 -->
@@ -44,8 +44,8 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.tongji.xiaohashu.auth.domain.mapper"
                              targetProject="src/main/java"/>
 
-        <!-- 需要生成的表-实体类 -->
-        <table tableName="t_user" domainObjectName="UserDO"
+        <!--  需要生成的表-实体类  -->
+        <table tableName="t_role_permission_rel" domainObjectName="RolePermissionDO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

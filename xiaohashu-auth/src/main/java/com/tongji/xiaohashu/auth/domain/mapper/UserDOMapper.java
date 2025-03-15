@@ -14,4 +14,6 @@ public interface UserDOMapper {
     int updateByPrimaryKeySelective(UserDO row);
 
     int updateByPrimaryKey(UserDO row);
+
+    UserDO selectByPhone(String phone);
 }
