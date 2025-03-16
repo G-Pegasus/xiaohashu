@@ -11,28 +11,31 @@
   <modules>
     <module>xiaohashu-auth</module>
     <module>xiaoha-framework</module>
+    <module>xiaohashu-gateway</module>
   </modules>
   <properties>
-    <hutool.version>5.8.36</hutool.version>
     <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
     <jackson.version>2.18.2</jackson.version>
-    <sa-token.version>1.39.0</sa-token.version>
-    <guava.version>33.4.0-jre</guava.version>
-    <spring-boot.version>3.3.1</spring-boot.version>
-    <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
-    <dysmsapi.version>3.1.1</dysmsapi.version>
     <spring-cloud.version>2022.0.0</spring-cloud.version>
-    <mybatis-spring.version>3.0.4</mybatis-spring.version>
-    <mybatis-generator-maven-plugin.version>1.4.2</mybatis-generator-maven-plugin.version>
     <jakarta-validation-api.version>3.1.1</jakarta-validation-api.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <commons-lang3.version>3.17.0</commons-lang3.version>
-    <java.version>17</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
+    <hutool.version>5.8.36</hutool.version>
+    <sa-token.version>1.39.0</sa-token.version>
+    <guava.version>33.4.0-jre</guava.version>
+    <spring-boot.version>3.0.2</spring-boot.version>
+    <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+    <dysmsapi.version>3.1.1</dysmsapi.version>
+    <mybatis-spring.version>3.0.4</mybatis-spring.version>
+    <mybatis-generator-maven-plugin.version>1.4.2</mybatis-generator-maven-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>17</java.version>
     <lombok.version>1.18.36</lombok.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <druid.version>1.2.24</druid.version>
+    <nacos-config.version>0.3.0-RC</nacos-config.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -136,6 +139,21 @@
         <groupId>cn.dev33</groupId>
         <artifactId>sa-token-redis-jackson</artifactId>
         <version>${sa-token.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>nacos-config-spring-boot-starter</artifactId>
+        <version>${nacos-config.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.dev33</groupId>
+        <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
+        <version>${sa-token.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>transmittable-thread-local</artifactId>
+        <version>${transmittable-thread-local.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

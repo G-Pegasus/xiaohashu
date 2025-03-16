@@ -28,9 +28,7 @@ object RedisKeyConstants {
      * 构建验证码 KEY
      */
     @JvmStatic
-    fun buildUserRoleKey(phone: String): String {
-        return USER_ROLES_KEY_PREFIX + phone
-    }
+    fun buildUserRoleKey(userId: Long) = "$USER_ROLES_KEY_PREFIX$userId"
 
     /**
      * 角色对应的权限集合 KEY 前缀
@@ -42,7 +40,5 @@ object RedisKeyConstants {
      * 构建角色对应的权限集合 KEY
      */
     @JvmStatic
-    fun buildRolePermissionsKey(roleId: Long): String {
-        return ROLE_PERMISSIONS_KEY_PREFIX + roleId
-    }
+    fun buildRolePermissionsKey(roleKey: String) = "$ROLE_PERMISSIONS_KEY_PREFIX$roleKey"
 }

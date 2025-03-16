@@ -1,6 +1,7 @@
 package com.tongji.xiaohashu.auth.service;
 
 import com.tongji.framework.common.response.Response;
+import com.tongji.xiaohashu.auth.model.vo.user.UpdatePasswordReqVO;
 import com.tongji.xiaohashu.auth.model.vo.user.UserLoginReqVO;
 
 /**
@@ -9,5 +10,12 @@ import com.tongji.xiaohashu.auth.model.vo.user.UserLoginReqVO;
  * @description
  */
 public interface UserService {
+    // 注册与登录
     Response<String> loginAndRegister(UserLoginReqVO userLoginReqVO);
+
+    // 退出登录
+    Response<?> logout();
+
+    // 修改密码
+    Response<?> updatePassword(UpdatePasswordReqVO updatePasswordReqVO);
 }
