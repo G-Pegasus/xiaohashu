@@ -22,6 +22,7 @@
     <module>xiaoha-framework</module>
     <module>xiaohashu-gateway</module>
     <module>xiaohashu-oss</module>
+    <module>xiaohashu-user</module>
   </modules>
 
   <properties>
@@ -57,6 +58,7 @@
     <jaxb-api.version>2.3.1</jaxb-api.version>
     <activation.version>1.1.1</activation.version>
     <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
+    <feign-form.version>3.8.0</feign-form.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -242,6 +244,24 @@
         <groupId>org.glassfish.jaxb</groupId>
         <artifactId>jaxb-runtime</artifactId>
         <version>${jaxb-runtime.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-oss-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.openfeign.form</groupId>
+        <artifactId>feign-form</artifactId>
+        <version>${feign-form.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-user-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
       </dependency>
 
     </dependencies>

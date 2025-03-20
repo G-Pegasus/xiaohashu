@@ -12,6 +12,8 @@
     <module>xiaohashu-auth</module>
     <module>xiaoha-framework</module>
     <module>xiaohashu-gateway</module>
+    <module>xiaohashu-oss</module>
+    <module>xiaohashu-user</module>
   </modules>
   <properties>
     <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
@@ -21,7 +23,11 @@
     <commons-lang3.version>3.17.0</commons-lang3.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
+    <jaxb-api.version>2.3.1</jaxb-api.version>
     <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
+    <minio.version>8.5.17</minio.version>
+    <feign-form.version>3.8.0</feign-form.version>
     <hutool.version>5.8.36</hutool.version>
     <sa-token.version>1.39.0</sa-token.version>
     <guava.version>33.4.0-jre</guava.version>
@@ -32,6 +38,8 @@
     <mybatis-generator-maven-plugin.version>1.4.2</mybatis-generator-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
+    <aliyun-sdk-oss.version>3.18.1</aliyun-sdk-oss.version>
+    <activation.version>1.1.1</activation.version>
     <lombok.version>1.18.36</lombok.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <druid.version>1.2.24</druid.version>
@@ -154,6 +162,46 @@
         <groupId>com.alibaba</groupId>
         <artifactId>transmittable-thread-local</artifactId>
         <version>${transmittable-thread-local.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaoha-spring-boot-starter-biz-context</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>io.minio</groupId>
+        <artifactId>minio</artifactId>
+        <version>${minio.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.aliyun.oss</groupId>
+        <artifactId>aliyun-sdk-oss</artifactId>
+        <version>${aliyun-sdk-oss.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>${jaxb-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>${activation.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>${jaxb-runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-oss-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign.form</groupId>
+        <artifactId>feign-form</artifactId>
+        <version>${feign-form.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

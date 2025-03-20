@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Optional;
@@ -44,17 +43,15 @@ public class GlobalExceptionHandler {
         StringBuilder sb = new StringBuilder();
 
         // 获取校验不通过的字段，并组合错误信息，格式为： email 邮箱格式不正确, 当前值: '123124qq.com';
-        Optional.of(bindingResult.getFieldErrors()).ifPresent(errors -> {
-            errors.forEach(error ->
-                    sb.append(error.getField())
-                            .append(" ")
-                            .append(error.getDefaultMessage())
-                            .append(", 当前值: '")
-                            .append(error.getRejectedValue())
-                            .append("'; ")
+        Optional.of(bindingResult.getFieldErrors()).ifPresent(errors -> errors.forEach(error ->
+                sb.append(error.getField())
+                        .append(" ")
+                        .append(error.getDefaultMessage())
+                        .append(", 当前值: '")
+                        .append(error.getRejectedValue())
+                        .append("'; ")
 
-            );
-        });
+        ));
 
         // 错误信息
         String errorMessage = sb.toString();

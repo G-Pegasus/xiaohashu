@@ -1,6 +1,6 @@
 package com.tongji.xiaohashu.auth.model.vo.user;
 
-import com.tongji.xiaohashu.auth.validator.PhoneNumber;
+import com.tongji.framework.common.validator.PhoneNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

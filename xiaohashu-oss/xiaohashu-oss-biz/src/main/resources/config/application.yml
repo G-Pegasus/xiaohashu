@@ -6,5 +6,5 @@ spring:
     active: dev # 默认激活 dev 本地开发环境
 
 storage:
-  type: aliyun # 对象存储类型
+  type: minio # 对象存储类型
 

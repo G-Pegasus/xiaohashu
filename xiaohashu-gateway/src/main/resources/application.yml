@@ -10,12 +10,18 @@ spring:
             - Path=/auth/** # 以 /auth/ 开头的路径都会匹配这个路由规则。例如，/auth/login、/auth/register 都会被这个路由处理。/** 是一个通配符，表示任意的后续路径。
           filters:
             - StripPrefix=1 # 定义路由过滤器。- StripPrefix=1: 表示去掉路径中的第一个部分。例如，当请求路径为 /auth/verification/code/send 时，去掉第一个前缀部分后，实际传递给 xiaohashu-auth 服务的路径将变成 /verification/code/send。
+        - id: user
+          uri: lb://xiaohashu-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
   data:
     redis:
       database: 0 # Redis 数据库索引（默认为 0）
       host: 127.0.0.1 # Redis 服务器地址
       port: 6379 # Redis 服务器连接端口
-      password: qwe123!@# # Redis 服务器连接密码（默认为空）
+      password: liutongji8512 # Redis 服务器连接密码（默认为空）
       timeout: 5s # 读超时时间
       connect-timeout: 5s # 链接超时时间
       lettuce:
