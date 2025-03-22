@@ -70,7 +70,7 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!-- 是 @Validated 起作用 -->
+        <!-- 使 @Validated 起作用 -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>

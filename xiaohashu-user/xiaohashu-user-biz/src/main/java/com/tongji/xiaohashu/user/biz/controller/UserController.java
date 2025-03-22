@@ -30,6 +30,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperationLog(description = "更新用户信息")
     public Response<?> updateUserInfo(@Validated UpdateUserInfoReqVO updateUserInfoReqVO) {
         return userService.updateUserInfo(updateUserInfoReqVO);
     }

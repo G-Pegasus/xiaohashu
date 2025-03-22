@@ -17,6 +17,12 @@
     <file url="file://$PROJECT_DIR$/xiaohashu-auth/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiaohashu-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiaohashu-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/xiaohashu-kv-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/xiaohashu-kv-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/xiaohashu-kv-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaohashu-kv/xiaohashu-kv-biz/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiaohashu-oss/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiaohashu-oss/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiaohashu-oss/xiaohashu-oss-api/src/main/java" charset="UTF-8" />

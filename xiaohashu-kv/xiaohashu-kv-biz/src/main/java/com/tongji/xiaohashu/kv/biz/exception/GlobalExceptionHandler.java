@@ -1,29 +1,32 @@
-package com.tongji.xiaohashu.oss.biz.exception;
+package com.tongji.xiaohashu.kv.biz.exception;
 
 import com.tongji.framework.common.exception.BizException;
 import com.tongji.framework.common.response.Response;
-import com.tongji.xiaohashu.oss.biz.enums.ResponseCodeEnum;
+import com.tongji.xiaohashu.kv.biz.enums.ResponseCodeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Optional;
 
 /**
  * @author tongji
- * @time 2025/3/18 17:38
- * @description 全局异常处理
+ * @time 2025/3/21 11:06
+ * @description
  */
-@RestControllerAdvice
+@ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
     /**
      * 捕获自定义业务异常
      */
     @ExceptionHandler({ BizException.class })
+    @ResponseBody
     public Response<Object> handleBizException(HttpServletRequest request, BizException e) {
         log.warn("{} request fail, errorCode: {}, errorMessage: {}", request.getRequestURI(), e.getErrorCode(), e.getErrorMessage());
         return Response.fail(e);
@@ -33,6 +36,7 @@ public class GlobalExceptionHandler {
      * 捕获参数校验异常
      */
     @ExceptionHandler({ MethodArgumentNotValidException.class })
+    @ResponseBody
     public Response<Object> handleMethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException e) {
         // 参数错误异常码
         String errorCode = ResponseCodeEnum.PARAM_NOT_VALID.getErrorCode();
@@ -50,6 +54,7 @@ public class GlobalExceptionHandler {
                         .append(", 当前值: '")
                         .append(error.getRejectedValue())
                         .append("'; ")
+
         ));
 
         // 错误信息
@@ -64,6 +69,7 @@ public class GlobalExceptionHandler {
      * 捕获 guava 参数校验异常
      */
     @ExceptionHandler({ IllegalArgumentException.class })
+    @ResponseBody
     public Response<Object> handleIllegalArgumentException(HttpServletRequest request, IllegalArgumentException e) {
         // 参数错误异常码
         String errorCode = ResponseCodeEnum.PARAM_NOT_VALID.getErrorCode();
@@ -80,6 +86,7 @@ public class GlobalExceptionHandler {
      * 其他类型异常
      */
     @ExceptionHandler({ Exception.class })
+    @ResponseBody
     public Response<Object> handleOtherException(HttpServletRequest request, Exception e) {
         log.error("{} request error, ", request.getRequestURI(), e);
         return Response.fail(ResponseCodeEnum.SYSTEM_ERROR);

@@ -23,6 +23,7 @@
     <module>xiaohashu-gateway</module>
     <module>xiaohashu-oss</module>
     <module>xiaohashu-user</module>
+    <module>xiaohashu-kv</module>
   </modules>
 
   <properties>
@@ -261,6 +262,12 @@
       <dependency>
         <groupId>com.tongji</groupId>
         <artifactId>xiaohashu-user-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-kv-api</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
 
