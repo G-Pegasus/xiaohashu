@@ -27,4 +27,9 @@ object RedisKeyConstants {
      */
     @JvmStatic
     fun buildUserRoleKey(userId: Long) = "$USER_ROLES_KEY_PREFIX$userId"
+
+    /**
+     * Sa-Token 登录的 Token KEY 前缀
+     */
+    const val SA_TOKEN_TOKEN_KEY_PREFIX = "Authorization:login:token:"
 }

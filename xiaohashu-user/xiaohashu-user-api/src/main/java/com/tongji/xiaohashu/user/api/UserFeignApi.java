@@ -2,9 +2,11 @@ package com.tongji.xiaohashu.user.api;
 
 import com.tongji.framework.common.response.Response;
 import com.tongji.xiaohashu.user.constant.ApiConstants;
+import com.tongji.xiaohashu.user.dto.req.FindUserByIdReqDTO;
 import com.tongji.xiaohashu.user.dto.req.FindUserByPhoneReqDTO;
 import com.tongji.xiaohashu.user.dto.req.RegisterUserReqDTO;
 import com.tongji.xiaohashu.user.dto.req.UpdateUserPasswordReqDTO;
+import com.tongji.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,4 +29,7 @@ public interface UserFeignApi {
 
     @PostMapping(value = PREFIX + "/password/update")
     Response<?> updatePassword(@RequestBody UpdateUserPasswordReqDTO updateUserPasswordReqDTO);
+
+    @PostMapping(value = PREFIX + "/findById")
+    Response<FindUserByIdRspDTO> findById(@RequestBody FindUserByIdReqDTO findUserByIdReqDTO);
 }

@@ -122,6 +122,16 @@
             <artifactId>xiaohashu-user-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.tongji</groupId>
+            <artifactId>xiaohashu-distributed-id-generator-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

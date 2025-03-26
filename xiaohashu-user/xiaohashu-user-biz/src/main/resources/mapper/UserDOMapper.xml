@@ -43,7 +43,7 @@
       #{status,jdbcType=TINYINT}, #{introduction,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.tongji.xiaohashu.user.biz.domain.dataobject.UserDO">
+  <insert id="insertSelective" parameterType="com.tongji.xiaohashu.user.biz.domain.dataobject.UserDO" useGeneratedKeys="true">
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

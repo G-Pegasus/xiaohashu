@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 
 public class JsonUtils {
     private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -23,5 +24,14 @@ public class JsonUtils {
 
     public static void init(ObjectMapper objectMapper) {
         OBJECT_MAPPER = objectMapper;
+    }
+
+    @SneakyThrows
+    public static <T> T parseObject(String jsonStr, Class<T> clazz) {
+        if (StringUtils.isBlank(jsonStr)) {
+            return null;
+        }
+
+        return OBJECT_MAPPER.readValue(jsonStr, clazz);
     }
 }

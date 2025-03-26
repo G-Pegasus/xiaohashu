@@ -28,4 +28,15 @@ object RedisKeyConstants {
      */
     @JvmStatic
     fun buildRolePermissionsKey(roleKey: String) = "$ROLE_PERMISSIONS_KEY_PREFIX$roleKey"
+
+    /**
+     * 用户信息数据 KEY 前缀
+     */
+    private const val USER_INFO_KEY_PREFIX: String = "user:info:"
+
+    /**
+     * 构建角色对应的权限集合 KEY
+     */
+    @JvmStatic
+    fun buildUserInfoKey(userId: Long) = "$USER_INFO_KEY_PREFIX$userId"
 }

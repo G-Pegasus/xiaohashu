@@ -16,15 +16,18 @@
       <option name="ignoredModules">
         <list>
           <option value="xiaohashu-gateway" />
+          <option value="xiaohashu-note-biz" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="ch.qos.logback:logback-classic:1.4.5" />
+          <option value="com.alibaba:fastjson:1.2.69_noneautotype" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>
