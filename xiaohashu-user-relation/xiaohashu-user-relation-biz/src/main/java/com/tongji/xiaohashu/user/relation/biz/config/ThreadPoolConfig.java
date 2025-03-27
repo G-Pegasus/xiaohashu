@@ -1,4 +1,4 @@
-package com.tongji.xiaohashu.user.biz.config;
+package com.tongji.xiaohashu.user.relation.biz.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

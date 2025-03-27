@@ -1,4 +1,4 @@
-package com.tongji.xiaohashu.user.dto.resp;
+package com.tongji.xiaohashu.user.relation.biz.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,16 +7,19 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author tongji
- * @time 2025/3/24 20:51
- * @description
+ * @time 2025/3/27 19:49
+ * @description 查询关注列表出参
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FindUserByIdRspDTO {
-    private Long id;
-    private String nickName;
+public class FindFollowingUserRspVO {
+    private Long userId;
+
     private String avatar;
+
+    private String nickname;
+
     private String introduction;
 }

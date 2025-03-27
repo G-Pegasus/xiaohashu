@@ -2,12 +2,11 @@ package com.tongji.xiaohashu.user.biz.service;
 
 import com.tongji.framework.common.response.Response;
 import com.tongji.xiaohashu.user.biz.model.vo.UpdateUserInfoReqVO;
-import com.tongji.xiaohashu.user.dto.req.FindUserByIdReqDTO;
-import com.tongji.xiaohashu.user.dto.req.FindUserByPhoneReqDTO;
-import com.tongji.xiaohashu.user.dto.req.RegisterUserReqDTO;
-import com.tongji.xiaohashu.user.dto.req.UpdateUserPasswordReqDTO;
+import com.tongji.xiaohashu.user.dto.req.*;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
+
+import java.util.List;
 
 /**
  * @author tongji
@@ -29,4 +28,7 @@ public interface UserService {
 
     // 根据用户 ID 查询用户信息
     Response<FindUserByIdRspDTO> findById(FindUserByIdReqDTO findUserByIdReqDTO);
+
+    // 批量根据用户 ID 查询用户信息
+    Response<List<FindUserByIdRspDTO>> findByIds(FindUserByIdsReqDTO findUserByIdsReqDTO);
 }

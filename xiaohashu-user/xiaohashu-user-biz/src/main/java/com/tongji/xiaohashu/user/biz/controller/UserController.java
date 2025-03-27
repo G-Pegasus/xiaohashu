@@ -4,10 +4,7 @@ import com.tongji.framework.biz.operationlog.aspect.ApiOperationLog;
 import com.tongji.framework.common.response.Response;
 import com.tongji.xiaohashu.user.biz.model.vo.UpdateUserInfoReqVO;
 import com.tongji.xiaohashu.user.biz.service.UserService;
-import com.tongji.xiaohashu.user.dto.req.FindUserByIdReqDTO;
-import com.tongji.xiaohashu.user.dto.req.FindUserByPhoneReqDTO;
-import com.tongji.xiaohashu.user.dto.req.RegisterUserReqDTO;
-import com.tongji.xiaohashu.user.dto.req.UpdateUserPasswordReqDTO;
+import com.tongji.xiaohashu.user.dto.req.*;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
 import jakarta.annotation.Resource;
@@ -18,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author tongji
@@ -59,5 +58,11 @@ public class UserController {
     @ApiOperationLog(description = "查询用户信息")
     public Response<FindUserByIdRspDTO> findById(@Validated @RequestBody FindUserByIdReqDTO findUserByIdReqDTO) {
         return userService.findById(findUserByIdReqDTO);
+    }
+
+    @PostMapping("/findByIds")
+    @ApiOperationLog(description = "批量查询用户信息")
+    public Response<List<FindUserByIdRspDTO>> findByIds(@Validated @RequestBody FindUserByIdsReqDTO findUsersByIdsReqDTO) {
+        return userService.findByIds(findUsersByIdsReqDTO);
     }
 }

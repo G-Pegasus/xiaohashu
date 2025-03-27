@@ -319,6 +319,19 @@ public class NoteServiceImpl implements NoteService {
                 break;
         }
 
+        // 当前登录的用户 ID
+        Long currUserId = LoginUserContextHolder.getUserId();
+        NoteDO selectNoteDO = noteDOMapper.selectByPrimaryKey(noteId);
+
+        if (Objects.isNull(selectNoteDO)) {
+            throw new BizException(ResponseCodeEnum.NOTE_NOT_FOUND);
+        }
+
+        // 判断权限
+        if (!Objects.equals(currUserId, selectNoteDO.getCreatorId())) {
+            throw new BizException(ResponseCodeEnum.NOTE_CANT_OPERATE);
+        }
+
         Long topicId = updateNoteReqVO.getTopicId();
         String topicName = null;
         if (Objects.nonNull(topicId)) {
@@ -353,7 +366,7 @@ public class NoteServiceImpl implements NoteService {
 
         // 同步发送广播模式 MQ，将所有实例中的本地缓存都删除掉
         rocketMQTemplate.syncSend(MQConstants.TOPIC_DELETE_NOTE_LOCAL_CACHE, noteId);
-        log.info("====> MQ：删除笔记本地缓存发送成功...");
+        printLog();
 
         // 笔记内容更新
         NoteDO noteDO1 = noteDOMapper.selectByPrimaryKey(noteId);
@@ -388,6 +401,19 @@ public class NoteServiceImpl implements NoteService {
     public Response<?> deleteNote(DeleteNoteReqVO deleteNoteReqVO) {
         Long noteId = deleteNoteReqVO.getId();
 
+        NoteDO selectNoteDO = noteDOMapper.selectByPrimaryKey(noteId);
+
+        // 判断笔记是否存在
+        if (Objects.isNull(selectNoteDO)) {
+            throw new BizException(ResponseCodeEnum.NOTE_NOT_FOUND);
+        }
+
+        // 判断权限：非笔记发布者不允许删除笔记
+        Long currUserId = LoginUserContextHolder.getUserId();
+        if (!Objects.equals(currUserId, selectNoteDO.getCreatorId())) {
+            throw new BizException(ResponseCodeEnum.NOTE_CANT_OPERATE);
+        }
+
         // 逻辑删除
         NoteDO noteDO = NoteDO.builder()
                 .id(noteId)
@@ -395,12 +421,7 @@ public class NoteServiceImpl implements NoteService {
                 .updateTime(LocalDateTime.now())
                 .build();
 
-        int count = noteDOMapper.updateByPrimaryKeySelective(noteDO);
-
-        // 若影响行数为 0，则代表笔记不存在
-        if (count == 0) {
-            throw new BizException(ResponseCodeEnum.NOTE_NOT_FOUND);
-        }
+        noteDOMapper.updateByPrimaryKeySelective(noteDO);
 
         // 删除缓存
         String noteDetailRedisKey = RedisKeyConstants.buildNoteDetailKey(noteId);
@@ -408,7 +429,7 @@ public class NoteServiceImpl implements NoteService {
 
         // 同步发送广播模式 MQ，将所有实例中的本地缓存都删除掉
         rocketMQTemplate.syncSend(MQConstants.TOPIC_DELETE_NOTE_LOCAL_CACHE, noteId);
-        log.info("====> MQ：删除笔记本地缓存发送成功...");
+        printLog();
 
         return Response.success();
     }
@@ -416,6 +437,19 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Response<?> visibleOnlyMe(UpdateNoteVisibleOnlyMeReqVO updateNoteVisibleOnlyMeReqVO) {
         Long noteId = updateNoteVisibleOnlyMeReqVO.getId();
+
+        NoteDO selectNoteDO = noteDOMapper.selectByPrimaryKey(noteId);
+
+        // 判断笔记是否存在
+        if (Objects.isNull(selectNoteDO)) {
+            throw new BizException(ResponseCodeEnum.NOTE_NOT_FOUND);
+        }
+
+        // 判断权限：非笔记发布者不允许修改笔记权限
+        Long currUserId = LoginUserContextHolder.getUserId();
+        if (!Objects.equals(currUserId, selectNoteDO.getCreatorId())) {
+            throw new BizException(ResponseCodeEnum.NOTE_CANT_OPERATE);
+        }
 
         NoteDO noteDO = NoteDO.builder()
                 .id(noteId)
@@ -433,7 +467,7 @@ public class NoteServiceImpl implements NoteService {
         redisTemplate.delete(noteDetailRedisKey);
 
         rocketMQTemplate.syncSend(MQConstants.TOPIC_DELETE_NOTE_LOCAL_CACHE, noteId);
-        log.info("====> MQ：删除笔记本地缓存发送成功...");
+        printLog();
 
         return Response.success();
     }
@@ -462,7 +496,7 @@ public class NoteServiceImpl implements NoteService {
         redisTemplate.delete(noteDetailRedisKey);
 
         rocketMQTemplate.syncSend(MQConstants.TOPIC_DELETE_NOTE_LOCAL_CACHE, noteId);
-        log.info("====> MQ：删除笔记本地缓存发送成功...");
+        printLog();
 
         return Response.success();
     }
@@ -489,5 +523,9 @@ public class NoteServiceImpl implements NoteService {
             Integer visible = findNoteDetailRspVO.getVisible();
             checkNoteVisible(visible, userId, findNoteDetailRspVO.getCreatorId());
         }
+    }
+
+    private void printLog() {
+        log.info("====> MQ：删除笔记本地缓存发送成功...");
     }
 }
