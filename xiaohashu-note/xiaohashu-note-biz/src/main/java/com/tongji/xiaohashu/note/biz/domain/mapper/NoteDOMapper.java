@@ -1,6 +1,7 @@
 package com.tongji.xiaohashu.note.biz.domain.mapper;
 
 import com.tongji.xiaohashu.note.biz.domain.dataobject.NoteDO;
+import org.apache.ibatis.annotations.Param;
 
 public interface NoteDOMapper {
     int deleteByPrimaryKey(Long id);
@@ -18,4 +19,6 @@ public interface NoteDOMapper {
     int updateVisibleOnlyMe(NoteDO noteDO);
 
     int updateIsTop(NoteDO noteDO);
+
+    int selectCountByNoteId(Long noteId);
 }

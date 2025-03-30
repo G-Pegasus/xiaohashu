@@ -45,7 +45,7 @@
                              targetProject="src/main/java"/>
 
         <!-- 需要生成的表-实体类 -->
-        <table tableName="t_note" domainObjectName="NoteDO"
+        <table tableName="t_note_like" domainObjectName="NoteLikeDO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

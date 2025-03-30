@@ -27,6 +27,7 @@
     <module>xiaohashu-distributed-id-generator</module>
     <module>xiaohashu-note</module>
     <module>xiaohashu-user-relation</module>
+      <module>xiaohashu-count</module>
   </modules>
 
   <properties>
@@ -65,6 +66,7 @@
     <feign-form.version>3.8.0</feign-form.version>
     <caffeine.version>3.2.0</caffeine.version>
     <rocketmq.version>2.2.3</rocketmq.version>
+    <buffertrigger.version>0.2.21</buffertrigger.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -292,6 +294,13 @@
         <groupId>org.apache.rocketmq</groupId>
         <artifactId>rocketmq-spring-boot-starter</artifactId>
         <version>${rocketmq.version}</version>
+      </dependency>
+
+      <!-- 快手 Buffer Trigger -->
+      <dependency>
+        <groupId>com.github.phantomthief</groupId>
+        <artifactId>buffer-trigger</artifactId>
+        <version>${buffertrigger.version}</version>
       </dependency>
 
     </dependencies>

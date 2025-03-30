@@ -31,6 +31,11 @@ public class LeafController {
         return get(key, snowflakeService.getId(key));
     }
 
+//    @RequestMapping(value = "/redis/get/{key}")
+//    public String getRedisId(@PathVariable("key") String key) {
+//        return get(key, redisIDGen.get(key));
+//    }
+
     private String get(@PathVariable("key") String key, Result id) {
         Result result;
         if (key == null || key.isEmpty()) {

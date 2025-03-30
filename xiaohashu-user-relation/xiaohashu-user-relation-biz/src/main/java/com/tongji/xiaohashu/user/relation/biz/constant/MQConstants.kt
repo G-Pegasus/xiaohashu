@@ -15,4 +15,14 @@ object MQConstants {
      * 取关标签
      */
     const val TAG_UNFOLLOW = "Unfollow"
+
+    /**
+     * Topic: 关注数计数
+     */
+    const val TOPIC_COUNT_FOLLOWING = "CountFollowingTopic"
+
+    /**
+     * Topic: 粉丝数计数
+     */
+    const val TOPIC_COUNT_FANS = "CountFansTopic"
 }

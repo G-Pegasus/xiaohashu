@@ -213,4 +213,9 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT} and creator_id = #{creatorId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectCountByNoteId" resultType="int">
+    select count(1) from t_note where id = #{noteId} and status = 1
+  </select>
+
 </mapper>

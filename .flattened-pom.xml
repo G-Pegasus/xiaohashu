@@ -14,6 +14,11 @@
     <module>xiaohashu-gateway</module>
     <module>xiaohashu-oss</module>
     <module>xiaohashu-user</module>
+    <module>xiaohashu-kv</module>
+    <module>xiaohashu-distributed-id-generator</module>
+    <module>xiaohashu-note</module>
+    <module>xiaohashu-user-relation</module>
+    <module>xiaohashu-count</module>
   </modules>
   <properties>
     <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
@@ -21,6 +26,7 @@
     <spring-cloud.version>2022.0.0</spring-cloud.version>
     <jakarta-validation-api.version>3.1.1</jakarta-validation-api.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>
+    <caffeine.version>3.2.0</caffeine.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
@@ -37,6 +43,7 @@
     <mybatis-spring.version>3.0.4</mybatis-spring.version>
     <mybatis-generator-maven-plugin.version>1.4.2</mybatis-generator-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <rocketmq.version>2.2.3</rocketmq.version>
     <java.version>17</java.version>
     <aliyun-sdk-oss.version>3.18.1</aliyun-sdk-oss.version>
     <activation.version>1.1.1</activation.version>
@@ -202,6 +209,31 @@
         <groupId>io.github.openfeign.form</groupId>
         <artifactId>feign-form</artifactId>
         <version>${feign-form.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-user-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-kv-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tongji</groupId>
+        <artifactId>xiaohashu-distributed-id-generator-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
+        <artifactId>caffeine</artifactId>
+        <version>${caffeine.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-spring-boot-starter</artifactId>
+        <version>${rocketmq.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -94,7 +94,7 @@ public class SegmentIDGenImpl implements IDGen {
             if (dbTags == null || dbTags.isEmpty()) {
                 return;
             }
-            List<String> cacheTags = new ArrayList<String>(cache.keySet());
+            List<String> cacheTags = new ArrayList<>(cache.keySet());
             Set<String> insertTagsSet = new HashSet<>(dbTags);
             Set<String> removeTagsSet = new HashSet<>(cacheTags);
             //db中新加的tags灌进cache

@@ -25,6 +25,7 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
     TOPIC_NOT_FOUND("NOTE-20005", "该话题没有找到"),
     NOTE_CANT_VISIBLE_ONLY_ME("NOTE-20006", "此笔记无法修改为仅自己可见"),
     NOTE_CANT_OPERATE("NOTE-20007", "您无法操作该笔记"),
+    NOTE_ALREADY_LIKED("NOTE-20008", "您已经点赞过该笔记"),
     ;
 
     // 异常码
