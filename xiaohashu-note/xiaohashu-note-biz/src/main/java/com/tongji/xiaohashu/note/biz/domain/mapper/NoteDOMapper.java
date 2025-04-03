@@ -21,4 +21,7 @@ public interface NoteDOMapper {
     int updateIsTop(NoteDO noteDO);
 
     int selectCountByNoteId(Long noteId);
+
+    // 查询笔记的发布者用户 ID
+    Long selectCreatorIdByNoteId(Long noteId);
 }

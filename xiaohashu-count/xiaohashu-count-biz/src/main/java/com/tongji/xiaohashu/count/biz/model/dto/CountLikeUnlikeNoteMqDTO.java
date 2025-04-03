@@ -1,4 +1,4 @@
-package com.tongji.xiaohashu.note.biz.model.dto;
+package com.tongji.xiaohashu.count.biz.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 
 /**
  * @author tongji
- * @time 2025/3/30 21:25
- * @description 点赞、取消点赞笔记
+ * @time 2025/4/1 13:12
+ * @description
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LikeUnLikeNoteMqDTO {
+public class CountLikeUnlikeNoteMqDTO {
     private Long userId;
 
     private Long noteId;

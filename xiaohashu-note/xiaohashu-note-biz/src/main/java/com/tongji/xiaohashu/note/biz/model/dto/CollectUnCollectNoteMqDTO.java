@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
 
 /**
  * @author tongji
- * @time 2025/3/30 21:25
- * @description 点赞、取消点赞笔记
+ * @time 2025/4/2 14:16
+ * @description
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LikeUnLikeNoteMqDTO {
+public class CollectUnCollectNoteMqDTO {
     private Long userId;
 
     private Long noteId;
 
     /**
-     * 0: 取消点赞， 1：点赞
+     * 0: 取消收藏， 1：收藏
      */
     private Integer type;
 

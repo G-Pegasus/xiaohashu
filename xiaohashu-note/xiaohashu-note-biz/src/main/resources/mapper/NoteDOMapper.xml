@@ -218,4 +218,8 @@
     select count(1) from t_note where id = #{noteId} and status = 1
   </select>
 
+  <select id="selectCreatorIdByNoteId" resultType="long">
+    select creator_id from t_note where id = #{noteId} and status = 1
+  </select>
+
 </mapper>

@@ -32,4 +32,13 @@ public interface NoteService {
 
     // 笔记点赞
     Response<?> likeNote(LikeNoteReqVO likeNoteReqVO);
+
+    // 取消点赞笔记
+    Response<?> unlikeNote(UnLikeNoteReqVO unLikeNoteReqVO);
+
+    // 收藏笔记
+    Response<?> collectNote(CollectNoteReqVO collectNoteReqVO);
+
+    // 取消收藏笔记
+    Response<?> unCollectNote(UnCollectNoteReqVO unCollectNoteReqVO);
 }

@@ -127,4 +127,22 @@
       ON DUPLICATE KEY UPDATE following_total = following_total + (#{count});
   </insert>
 
+  <insert id="insertOrUpdateLikeTotalByUserId" parameterType="map">
+    INSERT INTO t_user_count (user_id, like_total)
+    VALUES (#{userId}, #{count})
+      ON DUPLICATE KEY UPDATE like_total = like_total + (#{count});
+  </insert>
+
+  <insert id="insertOrUpdateCollectTotalByUserId" parameterType="map">
+    INSERT INTO t_user_count (user_id, collect_total)
+    VALUES (#{userId}, #{count})
+      ON DUPLICATE KEY UPDATE collect_total = collect_total + (#{count});
+  </insert>
+
+  <insert id="insertOrUpdateNoteTotalByUserId" parameterType="map">
+    INSERT INTO t_user_count (user_id, note_total)
+    VALUES (#{userId}, #{count})
+      ON DUPLICATE KEY UPDATE note_total = note_total + (#{count});
+  </insert>
+
 </mapper>

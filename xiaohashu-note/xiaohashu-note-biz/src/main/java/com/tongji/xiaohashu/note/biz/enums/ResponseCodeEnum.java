@@ -26,6 +26,9 @@ public enum ResponseCodeEnum implements BaseExceptionInterface {
     NOTE_CANT_VISIBLE_ONLY_ME("NOTE-20006", "此笔记无法修改为仅自己可见"),
     NOTE_CANT_OPERATE("NOTE-20007", "您无法操作该笔记"),
     NOTE_ALREADY_LIKED("NOTE-20008", "您已经点赞过该笔记"),
+    NOTE_NOT_LIKED("NOTE-20009", "您未点赞该篇笔记，无法取消点赞"),
+    NOTE_ALREADY_COLLECTED("NOTE-20010", "您已经收藏过该笔记"),
+    NOTE_NOT_COLLECTED("NOTE-20011", "您未收藏该篇笔记，无法取消收藏"),
     ;
 
     // 异常码

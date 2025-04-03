@@ -1,6 +1,7 @@
 package com.tongji.xiaohashu.count.biz.domain.mapper;
 
 import com.tongji.xiaohashu.count.biz.domain.dataobject.NoteCountDO;
+import org.apache.ibatis.annotations.Param;
 
 public interface NoteCountDOMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +15,8 @@ public interface NoteCountDOMapper {
     int updateByPrimaryKeySelective(NoteCountDO row);
 
     int updateByPrimaryKey(NoteCountDO row);
+
+    int insertOrUpdateLikeTotalByNoteId(@Param("count") Integer count, @Param("noteId") Long noteId);
+
+    int insertOrUpdateCollectTotalByNoteId(@Param("count") Integer count, @Param("noteId") Long noteId);
 }

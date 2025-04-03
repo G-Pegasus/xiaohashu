@@ -26,4 +26,30 @@ object RedisKeyConstants {
      * Hash Field: 关注总数
      */
     const val FIELD_FOLLOWING_TOTAL = "followingTotal"
+
+    /**
+     * 笔记维度计数 Key 前缀
+     */
+    private const val COUNT_NOTE_KEY_PREFIX = "count:note:"
+
+    /**
+     * Hash Field: 笔记点赞总数
+     */
+    const val FIELD_LIKE_TOTAL = "likeTotal"
+
+    /**
+     * 构建笔记维度计数 Key
+     */
+    @JvmStatic
+    fun buildCountNoteKey(noteId: Long) = "$COUNT_NOTE_KEY_PREFIX$noteId"
+
+    /**
+     * Hash Field: 笔记收藏总数
+     */
+    const val FIELD_COLLECT_TOTAL = "collectTotal"
+
+    /**
+     * Hash Field: 笔记发布总数
+     */
+    const val FIELD_NOTE_TOTAL = "noteTotal"
 }

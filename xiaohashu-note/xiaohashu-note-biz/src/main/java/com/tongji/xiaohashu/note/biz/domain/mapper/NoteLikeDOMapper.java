@@ -30,4 +30,7 @@ public interface NoteLikeDOMapper {
      * 新增笔记点赞记录，若已存在，则更新笔记点赞记录
      */
     int insertOrUpdate(NoteLikeDO noteLikeDO);
+
+    // 取消点赞
+    int update2UnlikeByUserIdAndNoteId(NoteLikeDO noteLikeDO);
 }

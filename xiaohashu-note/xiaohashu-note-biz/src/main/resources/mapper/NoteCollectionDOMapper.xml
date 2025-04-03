@@ -90,4 +90,34 @@
       `status` = #{status,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectCountByUserIdAndNoteId" resultType="int" parameterType="map">
+    select count(1) from t_note_collection where user_id = #{userId} and note_id = #{noteId} and status = 1 limit 1
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
+    select note_id from t_note_collection
+    where user_id = #{userId} and status = 1
+  </select>
+
+  <select id="selectNoteIsCollected" parameterType="map" resultType="int">
+    select count(1) from t_note_collection where user_id = #{userId} and note_id = #{noteId} and status = 1 limit 1
+  </select>
+
+  <select id="selectCollectedByUserIdAndLimit" resultMap="BaseResultMap" parameterType="map">
+    select note_id, create_time from t_note_collection
+    where user_id = #{userId} and status = 1 order by create_time desc limit #{limit}
+  </select>
+
+  <insert id="insertOrUpdate" parameterType="com.tongji.xiaohashu.note.biz.domain.dataobject.NoteCollectionDO">
+    INSERT INTO t_note_collection (user_id, note_id, create_time, status)
+    VALUES (#{userId}, #{noteId}, #{createTime}, #{status})
+    ON DUPLICATE KEY UPDATE create_time = #{createTime}, status = #{status};
+  </insert>
+
+  <update id="update2UnCollectByUserIdAndNoteId" parameterType="com.tongji.xiaohashu.note.biz.domain.dataobject.NoteCollectionDO">
+    update t_note_collection set status = #{status}, create_time = #{createTime}
+    where user_id = #{userId} and note_id = #{noteId} and status = 1
+  </update>
+
 </mapper>
