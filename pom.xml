@@ -67,6 +67,7 @@
     <caffeine.version>3.2.0</caffeine.version>
     <rocketmq.version>2.2.3</rocketmq.version>
     <buffertrigger.version>0.2.21</buffertrigger.version>
+    <lettuce.version>6.3.0.RELEASE</lettuce.version>
   </properties>
 
   <!-- 统一依赖管理 -->
@@ -303,6 +304,12 @@
         <version>${buffertrigger.version}</version>
       </dependency>
 
+      <!-- Redis 高级客户端 -->
+      <dependency>
+        <groupId>io.lettuce</groupId>
+        <artifactId>lettuce-core</artifactId>
+        <version>${lettuce.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
