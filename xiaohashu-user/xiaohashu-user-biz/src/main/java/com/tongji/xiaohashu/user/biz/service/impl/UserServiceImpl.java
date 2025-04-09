@@ -3,7 +3,6 @@ package com.tongji.xiaohashu.user.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.tongji.framework.biz.context.holder.LoginUserContextHolder;
@@ -30,6 +29,7 @@ import com.tongji.xiaohashu.user.biz.service.UserService;
 import com.tongji.xiaohashu.user.dto.req.*;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByPhoneRspDTO;
+import io.lettuce.core.api.sync.RedisCommands;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -71,14 +71,13 @@ public class UserServiceImpl implements UserService {
     private DistributedIdGeneratorRpcService distributedIdGeneratorRpcService;
     @Resource(name = "taskExecutor")
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    @Resource
+    private RedisCommands<String, String> redisCommands;
     /**
      * 用户信息本地缓存
      */
-    private static final Cache<Long, FindUserByIdRspDTO> LOCAL_CACHE = Caffeine.newBuilder()
-            .initialCapacity(10000)
-            .maximumSize(10000)
-            .expireAfterWrite(1, TimeUnit.HOURS) // 设置缓存条目在写入后 1 小时过期
-            .build();
+    @Resource
+    private Cache<Long, FindUserByIdRspDTO> LOCAL_CACHE;
 
     @Override
     public Response<?> updateUserInfo(UpdateUserInfoReqVO updateUserInfoReqVO) {
@@ -283,7 +282,8 @@ public class UserServiceImpl implements UserService {
         String userInfoRedisKey = RedisKeyConstants.buildUserInfoKey(userId);
 
         // 先从 Redis 缓存中查询
-        String userInfoRedisValue = (String) redisTemplate.opsForValue().get(userInfoRedisKey);
+        // String userInfoRedisValue = (String) redisTemplate.opsForValue().get(userInfoRedisKey);
+        String userInfoRedisValue = redisCommands.get(userInfoRedisKey);
 
         // 若 Redis 缓存中存在该用户信息
         if (StringUtils.isNotBlank(userInfoRedisValue)) {
@@ -306,7 +306,8 @@ public class UserServiceImpl implements UserService {
             threadPoolTaskExecutor.execute(() -> {
                 // 防止缓存穿透，将空数据存入 Redis 缓存（过期时间不宜设置过长）
                 long expireSeconds = 60 + RandomUtil.randomInt(60);
-                redisTemplate.opsForValue().set(userInfoRedisKey, "null", expireSeconds, TimeUnit.SECONDS);
+                //redisTemplate.opsForValue().set(userInfoRedisKey, "null", expireSeconds, TimeUnit.SECONDS);
+                redisCommands.setex(userInfoRedisKey, expireSeconds, "null");
             });
 
             throw new BizException(ResponseCodeEnum.USER_NOT_FOUND);
@@ -322,7 +323,8 @@ public class UserServiceImpl implements UserService {
         // 异步将信息存入 Redis 缓存，提升响应速度
         threadPoolTaskExecutor.submit(() -> {
             long expireSeconds = 60*60*24 + RandomUtil.randomInt(60*60*24);
-            redisTemplate.opsForValue().set(userInfoRedisKey, JsonUtils.toJsonString(findUserByIdRspDTO), expireSeconds, TimeUnit.SECONDS);
+            // redisTemplate.opsForValue().set(userInfoRedisKey, JsonUtils.toJsonString(findUserByIdRspDTO), expireSeconds, TimeUnit.SECONDS);
+            redisCommands.setex(userInfoRedisKey, expireSeconds, JsonUtils.toJsonString(findUserByIdRspDTO));
         });
 
         return Response.success(findUserByIdRspDTO);

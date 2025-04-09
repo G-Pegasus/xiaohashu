@@ -132,6 +132,11 @@
             <artifactId>caffeine</artifactId>
         </dependency>
 
+        <!-- Redis 高级客户端 -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
