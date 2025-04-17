@@ -29,6 +29,7 @@ import com.tongji.xiaohashu.note.biz.rpc.DistributedIdGeneratorRpcService;
 import com.tongji.xiaohashu.note.biz.rpc.KeyValueRpcService;
 import com.tongji.xiaohashu.note.biz.rpc.UserRpcService;
 import com.tongji.xiaohashu.note.biz.service.NoteService;
+import com.tongji.xiaohashu.note.biz.utils.HotKeyAwareCacheManager;
 import com.tongji.xiaohashu.user.dto.resp.FindUserByIdRspDTO;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -82,14 +83,17 @@ public class NoteServiceImpl implements NoteService {
     private NoteLikeDOMapper noteLikeDOMapper;
     @Resource
     private NoteCollectionDOMapper noteCollectionDOMapper;
+
+    private static final HotKeyAwareCacheManager<Long, String> hotKeyAwareCacheManager = new HotKeyAwareCacheManager<>(10000);
+
     /**
      * 笔记详情本地缓存
      */
-    private static final Cache<Long, String> LOCAL_CACHE = Caffeine.newBuilder()
-            .initialCapacity(10000) // 设置初始容量为 10000 个条目
-            .maximumSize(10000) // 设置缓存的最大容量为 10000 个条目
-            .expireAfterWrite(1, TimeUnit.HOURS) // 设置缓存条目在写入后 1 小时过期
-            .build();
+//    private static final Cache<Long, String> LOCAL_CACHE = Caffeine.newBuilder()
+//            .initialCapacity(10000) // 设置初始容量为 10000 个条目
+//            .maximumSize(10000) // 设置缓存的最大容量为 10000 个条目
+//            .expireAfterWrite(1, TimeUnit.HOURS) // 设置缓存条目在写入后 1 小时过期
+//            .build();
 
     @Override
     public Response<?> publishNote(PublishNoteReqVO publishNoteReqVO) {
@@ -214,7 +218,8 @@ public class NoteServiceImpl implements NoteService {
         Long userId = LoginUserContextHolder.getUserId();
 
         // 先从本地缓存中读取
-        String findNoteDetailRspVOStrLocalCache = LOCAL_CACHE.getIfPresent(noteId);
+        // String findNoteDetailRspVOStrLocalCache = LOCAL_CACHE.getIfPresent(noteId);
+        String findNoteDetailRspVOStrLocalCache = hotKeyAwareCacheManager.get(noteId);
         if (StringUtils.isNotBlank(findNoteDetailRspVOStrLocalCache)) {
             FindNoteDetailRspVO findNoteDetailRspVO = JsonUtils.parseObject(findNoteDetailRspVOStrLocalCache, FindNoteDetailRspVO.class);
             log.info("==> 命中了本地缓存；{}", findNoteDetailRspVOStrLocalCache);
@@ -233,8 +238,8 @@ public class NoteServiceImpl implements NoteService {
             // 异步线程中将用户信息存入本地缓存
             threadPoolTaskExecutor.submit(() -> {
                 // 写入本地缓存
-                LOCAL_CACHE.put(noteId,
-                        Objects.isNull(findNoteDetailRspVO) ? "null" : JsonUtils.toJsonString(findNoteDetailRspVO));
+                // LOCAL_CACHE.put(noteId, Objects.isNull(findNoteDetailRspVO) ? "null" : JsonUtils.toJsonString(findNoteDetailRspVO));
+                hotKeyAwareCacheManager.put(noteId, Objects.isNull(findNoteDetailRspVO) ? "null" : JsonUtils.toJsonString(findNoteDetailRspVO));
             });
             // 可见性校验
             checkNoteVisibleFromVO(userId, findNoteDetailRspVO);
@@ -451,7 +456,8 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public void deleteNoteLocalCache(Long noteId) {
-        LOCAL_CACHE.invalidate(noteId);
+        // LOCAL_CACHE.invalidate(noteId);
+        hotKeyAwareCacheManager.invalidate(noteId);
     }
 
     @Override
@@ -975,7 +981,8 @@ public class NoteServiceImpl implements NoteService {
      */
     private Long checkNoteIsExistAndGetCreatorId(Long noteId) {
         // 先从本地缓存校验
-        String findNoteDetailRspVOStrLocalCache = LOCAL_CACHE.getIfPresent(noteId);
+        // String findNoteDetailRspVOStrLocalCache = LOCAL_CACHE.getIfPresent(noteId);
+        String findNoteDetailRspVOStrLocalCache = hotKeyAwareCacheManager.get(noteId);
         // 解析 Json 字符串为 VO 对象
         FindNoteDetailRspVO findNoteDetailRspVO = JsonUtils.parseObject(findNoteDetailRspVOStrLocalCache, FindNoteDetailRspVO.class);
 

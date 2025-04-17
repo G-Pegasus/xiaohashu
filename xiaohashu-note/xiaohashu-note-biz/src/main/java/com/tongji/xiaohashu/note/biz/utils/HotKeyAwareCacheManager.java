@@ -14,9 +14,9 @@ import java.util.concurrent.*;
  * @description 热键的缓存策略
  */
 public class HotKeyAwareCacheManager<K, V> {
-    private final Cache<K, V> cache;
+    private Cache<K, V> cache;
     private final ConcurrentMap<K, AccessStat> accessMap = new ConcurrentHashMap<>();
-    private final Duration windowDuration = Duration.ofMinutes(5);
+    private Duration windowDuration = Duration.ofMinutes(5);
 
     /**
      * @param maxSize 本地缓存的最大数量
@@ -25,6 +25,22 @@ public class HotKeyAwareCacheManager<K, V> {
      * key 的数据从本地缓存和 accessMap 中清除，节省内存
      */
     public HotKeyAwareCacheManager(long maxSize) {
+        caffeineInit(maxSize);
+
+        ScheduledExecutorService cleaner = Executors.newSingleThreadScheduledExecutor();
+        cleaner.scheduleAtFixedRate(this::cleanOldStats, 1, 1, TimeUnit.MINUTES);
+    }
+
+    public HotKeyAwareCacheManager(long maxSize, int windowSize) {
+        caffeineInit(maxSize);
+
+        this.windowDuration = Duration.ofMinutes(windowSize);
+
+        ScheduledExecutorService cleaner = Executors.newSingleThreadScheduledExecutor();
+        cleaner.scheduleAtFixedRate(this::cleanOldStats, 1, 1, TimeUnit.MINUTES);
+    }
+
+    private void caffeineInit(long maxSize) {
         this.cache = Caffeine.newBuilder()
                 .expireAfter(new Expiry<K, V>() {
                     @Override
@@ -47,28 +63,15 @@ public class HotKeyAwareCacheManager<K, V> {
                 })
                 .maximumSize(maxSize)
                 .build();
-
-        ScheduledExecutorService cleaner = Executors.newSingleThreadScheduledExecutor();
-        cleaner.scheduleAtFixedRate(this::cleanOldStats, 1, 1, TimeUnit.MINUTES);
     }
 
-    public V get(K key, Callable<V> redisLoader) {
+    public V get(K key) {
         // 热度统计
         AccessStat stat = accessMap.computeIfAbsent(key, k -> new AccessStat());
         stat.recordAccess(System.currentTimeMillis());
 
         // 先查本地缓存
-        V val = cache.getIfPresent(key);
-        if (val != null) return val;
-
-        try {
-            // 没命中从 Redis 中取
-            val = redisLoader.call();
-            cache.put(key, val);
-            return val;
-        } catch (Exception e) {
-            throw new RuntimeException("加载数据失败: " + key, e);
-        }
+        return cache.getIfPresent(key);
     }
 
     public void put(K key, V value) {
