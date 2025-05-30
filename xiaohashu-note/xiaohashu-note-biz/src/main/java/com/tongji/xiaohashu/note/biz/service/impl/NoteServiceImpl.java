@@ -273,7 +273,7 @@ public class NoteServiceImpl implements NoteService {
         CompletableFuture<String> finalContentResultFuture = contentResultFuture;
 
         CompletableFuture<FindNoteDetailRspVO> resultFuture = CompletableFuture
-                .allOf(userResultFuture, contentResultFuture)
+                .allOf(userResultFuture, finalContentResultFuture)
                 .thenApply(s -> {
                     FindUserByIdRspDTO findUserByIdRspDTO = userResultFuture.join();
                     String content = finalContentResultFuture.join();
